@@ -2,13 +2,64 @@
 
 import { GraduationCap, Translate } from "@phosphor-icons/react";
 import { clsx } from "clsx";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 import { education, languages, profile } from "@/data/profile";
 import { easeOutExpo } from "@/lib/motion";
 import { useStore } from "@/lib/store";
 import { Bezel, Reveal, SectionHeading } from "@/components/ui/primitives";
 
 const CEFR = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+
+/**
+ * CEFR scale where the reached level carries the colour: lower levels stay as a
+ * faint track, higher ones empty. Native speakers sit on the top step.
+ */
+function LevelScale({ level, delay }: { level: number; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
+
+  return (
+    <div ref={ref} className="mt-4 grid grid-cols-6 items-center gap-1.5">
+      {CEFR.map((c, i) => {
+        const current = i === level - 1;
+        const below = i < level - 1;
+        return (
+          <div key={c}>
+            <div
+              className={clsx(
+                "overflow-hidden rounded-full bg-white/[0.07]",
+                current ? "h-2.5 ring-1 ring-sage/40" : "h-1.5",
+              )}
+            >
+              {(current || below) && (
+                <motion.div
+                  className={clsx(
+                    "h-full origin-left rounded-full",
+                    current
+                      ? "bg-gradient-to-r from-sage to-bone shadow-[0_0_14px_rgba(163,177,138,0.6)]"
+                      : "bg-sage/25",
+                  )}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: inView ? 1 : 0 }}
+                  transition={{ duration: current ? 0.9 : 0.5, ease: easeOutExpo, delay: delay + i * 0.06 }}
+                />
+              )}
+            </div>
+            <span
+              className={clsx(
+                "mt-2 block text-center font-mono text-[10px]",
+                current ? "font-semibold text-bone" : below ? "text-bone/40" : "text-bone/25",
+              )}
+            >
+              {c}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function Education() {
   const { t, l } = useStore();
@@ -73,31 +124,7 @@ export function Education() {
                         <span className="font-display text-[2.4rem] leading-none text-bone">{l(lang.name)}</span>
                         <span className="text-[13px] text-bone/60">{l(lang.level)}</span>
                       </div>
-                      <div className="mt-4 grid grid-cols-6 gap-1.5">
-                        {CEFR.map((c, i) => (
-                          <div key={c}>
-                            <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
-                              {i < level && (
-                                <motion.div
-                                  className="h-full origin-left rounded-full bg-gradient-to-r from-fern to-sage"
-                                  initial={{ scaleX: 0 }}
-                                  whileInView={{ scaleX: 1 }}
-                                  viewport={{ once: true }}
-                                  transition={{ duration: 0.6, ease: easeOutExpo, delay: 0.2 + li * 0.2 + i * 0.07 }}
-                                />
-                              )}
-                            </div>
-                            <span
-                              className={clsx(
-                                "mt-2 block text-center font-mono text-[10px]",
-                                i < level ? "text-bone/70" : "text-bone/30",
-                              )}
-                            >
-                              {c}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
+                      <LevelScale level={level} delay={0.2 + li * 0.2} />
                     </li>
                   );
                 })}
