@@ -122,7 +122,6 @@ const es = {
     copied: "Copiado",
     linkedin: "LinkedIn",
     cv: "Descargar CV",
-    builtWith: "Diseñado y desarrollado por César con Next.js, TypeScript y Motion. Desplegado en Vercel.",
     backToTop: "Volver arriba",
   },
   palette: {
@@ -271,7 +270,6 @@ const en: Dict = {
     copied: "Copied",
     linkedin: "LinkedIn",
     cv: "Download résumé",
-    builtWith: "Designed and built by César with Next.js, TypeScript and Motion. Deployed on Vercel.",
     backToTop: "Back to top",
   },
   palette: {

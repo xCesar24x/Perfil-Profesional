@@ -111,7 +111,6 @@ export function Contact() {
           <p>
             © {year} {profile.name} · {l(profile.location)}
           </p>
-          <p className="max-w-md sm:text-center">{t.contact.builtWith}</p>
           <button
             type="button"
             onClick={() => scrollToSection("profile")}
