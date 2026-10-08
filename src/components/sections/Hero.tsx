@@ -52,7 +52,9 @@ function TrajectoryLines() {
 
 function MaskLine({ children, delay: seconds }: { children: ReactNode; delay: number }) {
   return (
-    <span className="block overflow-hidden pb-[0.08em]">
+    // The tight 0.88 leading pushes descenders (g) and accents outside the line
+    // box, so the mask gets extra room that the negative margins cancel out.
+    <span className="-mt-[0.12em] -mb-[0.16em] block overflow-hidden pt-[0.12em] pb-[0.24em]">
       <span className="enter-mask block" style={delay(seconds)}>
         {children}
       </span>
