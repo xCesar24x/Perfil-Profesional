@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# César Madrigal Rodríguez — Career Presentation
 
-## Getting Started
+Sitio interactivo con mi trayectoria profesional, pensado para usarlo en entrevistas: experiencia navegable con paneles expandibles, explorador de habilidades con evidencia y catálogo de certificaciones. Bilingüe (español en `/`, inglés en `/en`).
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, páginas 100 % estáticas) + **TypeScript**
+- **Tailwind CSS v4** con la paleta del proyecto como tokens (`src/app/globals.css`)
+- **Motion** para transiciones y animaciones
+- **Phosphor Icons** (peso *light*)
+- Tipografías: Instrument Serif · Geist · Geist Mono
+- Despliegue en **Vercel**
+
+## Funciones para entrevistas
+
+| Función | Cómo usarla |
+| --- | --- |
+| Paleta de comandos | `Ctrl + K` / `⌘ + K`: busca cualquier rol, habilidad o certificación y salta directo a ella |
+| Idioma en vivo | Botón `ES / EN` en la barra; la URL cambia a `/en` para compartir en inglés |
+| Enlaces directos a un rol | `/#role-grupo-anc`, `/en#role-dos-pinos`, etc. abren el rol expandido |
+| Métricas con contexto | Cada cifra de *Impacto* abre el rol del que proviene |
+| Evidencia de habilidades | Al elegir una habilidad se listan los roles donde se aplicó y las certificaciones que la respaldan |
+| CV descargable | Botón en el hero y en contacto (`public/cv/`) |
+
+## Editar el contenido
+
+Todo el contenido vive en `src/data/` y está tipado; no hace falta tocar componentes.
+
+| Archivo | Contenido |
+| --- | --- |
+| `profile.ts` | Nombre, titular, declaración, contacto, países, educación, idiomas y las métricas de *Impacto* |
+| `roles.ts` | Roles, capítulos, logros (usa `**negrita**`), métricas, alcance detallado y habilidades aplicadas |
+| `skills.ts` | Categorías y habilidades (`core: true` = aparece en el CV) |
+| `certifications.ts` | Certificaciones, emisor, fecha, ID de credencial y habilidades que valida |
+| `ui.ts` | Textos de la interfaz en ambos idiomas |
+
+Las relaciones se calculan solas: si agregas `"power-bi"` a las `skills` de un rol o certificación, aparecerá como evidencia en el explorador de habilidades.
+
+Los roles en curso usan `end: null`; su duración se calcula con el mes actual en el navegador.
+
+## Desarrollo local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre http://localhost:3000 (español) o http://localhost:3000/en (inglés).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # build de producción
+npm run lint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Despliegue
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El repositorio está conectado a Vercel: cada `git push` a `main` publica una nueva versión automáticamente.
