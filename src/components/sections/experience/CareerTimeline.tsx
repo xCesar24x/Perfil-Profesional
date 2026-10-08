@@ -41,7 +41,6 @@ export function CareerTimeline() {
   const activeSpan = active ? span(active, now) : null;
   const startLabel = active ? formatYM(active.start, t) : "";
   const endLabel = active ? (active.end ? formatYM(active.end, t) : t.experience.present) : "";
-  const clamp = (v: number) => Math.min(Math.max(v, 5), 95);
 
   return (
     <Bezel innerClassName="p-5 sm:p-7">
@@ -154,12 +153,17 @@ export function CareerTimeline() {
                       <AnimatePresence>
                         {isActive && (
                           <motion.span
-                            initial={{ opacity: 0, y: 4 }}
+                            initial={{ opacity: 0, y: i === 0 ? -4 : 4 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, transition: { duration: 0.1 } }}
                             transition={{ duration: 0.3, ease: easeOutExpo }}
-                            className="pointer-events-none absolute bottom-[calc(50%+12px)] z-10 rounded-lg bg-ink px-2.5 py-1.5 text-[11.5px] whitespace-nowrap text-paper shadow-lg"
-                            style={{ left: `${Math.min(pos(start), 70)}%` }}
+                            className={clsx(
+                              "pointer-events-none absolute z-10 rounded-lg bg-ink px-2.5 py-1.5 text-[11.5px] whitespace-nowrap text-paper shadow-lg",
+                              // The top row has no room above it inside the scroll area.
+                              i === 0 ? "top-[calc(50%+12px)]" : "bottom-[calc(50%+12px)]",
+                            )}
+                            // Bars on the right half anchor the tooltip to their end so it never runs off the chart.
+                            style={pos(start) > 55 ? { right: `${100 - pos(end)}%` } : { left: `${pos(start)}%` }}
                           >
                             {l(role.title)} · {formatDuration(monthsBetween(role.start, role.end, now), t)}
                           </motion.span>
@@ -201,8 +205,12 @@ export function CareerTimeline() {
                   ).map((chip) => (
                     <span
                       key={chip.text}
-                      className="absolute top-0 z-10 -translate-x-1/2 rounded-md bg-ink px-1.5 py-0.5 font-mono text-[11px] whitespace-nowrap text-paper"
-                      style={{ left: `${clamp(chip.x)}%` }}
+                      className={clsx(
+                        "absolute top-0 z-10 rounded-md bg-ink px-1.5 py-0.5 font-mono text-[11px] whitespace-nowrap text-paper",
+                        // Near either end, align the chip inward instead of centring it past the edge.
+                        chip.x > 85 ? "-translate-x-full" : chip.x < 15 ? "translate-x-0" : "-translate-x-1/2",
+                      )}
+                      style={{ left: `${chip.x}%` }}
                     >
                       {chip.text}
                     </span>
