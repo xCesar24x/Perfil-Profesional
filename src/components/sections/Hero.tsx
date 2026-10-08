@@ -11,46 +11,10 @@ import { easeOutExpo } from "@/lib/motion";
 import { useStore } from "@/lib/store";
 import { Bezel, Counter, Eyebrow, IslandButton } from "@/components/ui/primitives";
 import portrait from "@/assets/portrait.jpg";
+import { FloatingDots } from "./FloatingDots";
 
 const companies = new Set(roles.map((r) => r.company)).size;
 const current = roles.filter((r) => r.end === null);
-
-/** Nine flowing lines, one per role, drawn in on load. */
-function TrajectoryLines() {
-  const paths = Array.from({ length: 9 }, (_, i) => {
-    const y = 120 + i * 46;
-    const lift = 70 + i * 22;
-    return `M -40 ${y + 260} C 260 ${y + 220}, 420 ${y + 40}, 680 ${y - lift * 0.35} S 1100 ${y - lift}, 1480 ${y - lift * 1.6}`;
-  });
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1440 900"
-      preserveAspectRatio="xMidYMid slice"
-      className="pointer-events-none absolute inset-0 h-full w-full"
-    >
-      <defs>
-        <linearGradient id="traj" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor="#a3b18a" stopOpacity="0" />
-          <stop offset="0.45" stopColor="#a3b18a" stopOpacity="0.28" />
-          <stop offset="1" stopColor="#dad7cd" stopOpacity="0.5" />
-        </linearGradient>
-      </defs>
-      {paths.map((d, i) => (
-        <path
-          key={i}
-          d={d}
-          pathLength={1}
-          fill="none"
-          stroke="url(#traj)"
-          strokeWidth={i === 0 ? 1.4 : 0.8}
-          className="enter-draw"
-          style={delay(0.4 + i * 0.09)}
-        />
-      ))}
-    </svg>
-  );
-}
 
 function MaskLine({ children, delay: seconds }: { children: ReactNode; delay: number }) {
   return (
@@ -86,7 +50,7 @@ export function Hero() {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[radial-gradient(80%_60%_at_85%_10%,rgba(88,129,87,0.55),transparent_60%),radial-gradient(60%_50%_at_0%_100%,rgba(29,44,36,0.9),transparent_70%),linear-gradient(180deg,#344e41_0%,#2b4337_55%,#273b31_100%)]"
       />
-      <TrajectoryLines />
+      <FloatingDots />
 
       <div className="container-page relative flex flex-1 flex-col justify-center pt-28 pb-20 lg:pt-32">
         <div className="grid grid-cols-1 items-end gap-14 lg:grid-cols-12 lg:gap-10">
