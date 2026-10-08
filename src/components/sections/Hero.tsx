@@ -2,6 +2,7 @@
 
 import { ArrowDown, ArrowUpRight, DownloadSimple, MapPin } from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { certifications } from "@/data/certifications";
 import { countries, profile } from "@/data/profile";
@@ -9,6 +10,7 @@ import { roles } from "@/data/roles";
 import { easeOutExpo } from "@/lib/motion";
 import { useStore } from "@/lib/store";
 import { Bezel, Counter, Eyebrow, IslandButton } from "@/components/ui/primitives";
+import portrait from "@/assets/portrait.jpg";
 
 const companies = new Set(roles.map((r) => r.company)).size;
 const current = roles.filter((r) => r.end === null);
@@ -135,20 +137,29 @@ export function Hero() {
 
           <div className="enter-card lg:col-span-5" style={delay(0.6)}>
             <Bezel tone="dark" innerClassName="p-6 sm:p-7">
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] text-sage uppercase">
-                  <span className="relative flex size-2">
-                    <span className="size-2 animate-pulse-dot rounded-full bg-sage" />
-                  </span>
-                  {t.hero.currently}
-                </span>
-                <span className="flex items-center gap-1.5 text-[12.5px] text-bone/55">
-                  <MapPin size={14} weight="light" />
-                  {l(profile.location)}
-                </span>
+              <div className="flex items-center gap-4">
+                <div className="relative shrink-0">
+                  <Image
+                    src={portrait}
+                    alt={profile.name}
+                    sizes="72px"
+                    loading="eager"
+                    placeholder="blur"
+                    className="size-[4.5rem] rounded-full object-cover ring-1 ring-white/15"
+                  />
+                  <span className="absolute -right-0.5 -bottom-0.5 size-3.5 animate-pulse-dot rounded-full bg-sage ring-[3px] ring-deep" />
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-[15.5px] font-medium text-bone">{profile.name}</p>
+                  <p className="mt-1 flex items-center gap-1.5 text-[12.5px] text-bone/55">
+                    <MapPin size={14} weight="light" />
+                    {l(profile.location)}
+                  </p>
+                </div>
               </div>
 
-              <ul className="mt-5 space-y-2">
+              <p className="mt-6 font-mono text-[11px] tracking-[0.2em] text-sage uppercase">{t.hero.currently}</p>
+              <ul className="mt-3 space-y-2">
                 {current.map((role) => (
                   <li key={role.id}>
                     <button

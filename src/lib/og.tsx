@@ -16,13 +16,14 @@ const copy: Record<Lang, { stats: string[] }> = {
 };
 
 // Read once at module scope so the images can be prerendered at build time.
-const [serif, serifItalic] = await Promise.all([
+const [serif, serifItalic, portrait] = await Promise.all([
   readFile(join(fontDir, "instrument-serif-latin-400-normal.woff")),
   readFile(join(fontDir, "instrument-serif-latin-400-italic.woff")),
+  readFile(join(process.cwd(), "src/assets/portrait.jpg")),
 ]);
+const portraitSrc = `data:image/jpeg;base64,${portrait.toString("base64")}`;
 
 export function renderOgImage(lang: Lang) {
-
   const values = ["9+", String(countries.length), String(new Set(roles.map((r) => r.company)).size), String(certifications.length)];
 
   return new ImageResponse(
@@ -64,26 +65,36 @@ export function renderOgImage(lang: Lang) {
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 116, lineHeight: 0.9, letterSpacing: -3 }}>
-            {profile.nameLines[0]}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 116, lineHeight: 0.9, letterSpacing: -3 }}>
+              {profile.nameLines[0]}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                fontFamily: "Instrument Serif",
+                fontStyle: "italic",
+                fontSize: 116,
+                lineHeight: 0.95,
+                letterSpacing: -3,
+                color: "#a3b18a",
+              }}
+            >
+              {profile.nameLines[1]}
+            </div>
+            <div style={{ display: "flex", marginTop: 28, fontSize: 26, color: "rgba(218,215,205,0.75)", letterSpacing: 0.5 }}>
+              {profile.headline[lang]}
+            </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              fontFamily: "Instrument Serif",
-              fontStyle: "italic",
-              fontSize: 116,
-              lineHeight: 0.95,
-              letterSpacing: -3,
-              color: "#a3b18a",
-            }}
-          >
-            {profile.nameLines[1]}
-          </div>
-          <div style={{ display: "flex", marginTop: 28, fontSize: 26, color: "rgba(218,215,205,0.75)", letterSpacing: 0.5 }}>
-            {profile.headline[lang]}
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders plain <img> */}
+          <img
+            src={portraitSrc}
+            alt=""
+            width={236}
+            height={236}
+            style={{ borderRadius: 999, border: "6px solid rgba(218,215,205,0.18)" }}
+          />
         </div>
 
         <div style={{ display: "flex", gap: 16 }}>
