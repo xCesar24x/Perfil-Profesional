@@ -16,6 +16,7 @@
   --color-abyss: #1d2c24;
   --color-ink: #1c2a22;
   --color-muted: #55645a;
+  --color-surface: #f8f7f3;
 
   --font-display: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -237,4 +238,58 @@
 ::view-transition-new(root) {
   animation: lang-in 0.6s var(--ease-expo) both;
   mix-blend-mode: normal;
+}
+
+/*
+ * Role cards invert on hover. Tailwind utilities read the palette through
+ * these variables, so redefining them on the card flips everything inside it;
+ * registering them as <color> lets the swap transition instead of snapping.
+ */
+@property --color-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1c2a22;
+}
+@property --color-paper {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f2f1ec;
+}
+@property --color-surface {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f8f7f3;
+}
+@property --color-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #55645a;
+}
+@property --color-hunter {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3a5a40;
+}
+@property --color-fern {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #588157;
+}
+
+.role-card {
+  transition-property: --color-ink, --color-paper, --color-surface, --color-muted, --color-hunter, --color-fern;
+  transition-duration: 0.45s;
+  transition-timing-function: var(--ease-drawer);
+}
+
+@media (hover: hover) {
+  .role-card:hover {
+    --color-surface: #1c2a22;
+    --color-ink: #f2f1ec;
+    --color-paper: #26382e;
+    --color-muted: #a8b2a5;
+    --color-hunter: #a3b18a;
+    --color-fern: #c8d0b8;
+    --bezel-highlight: rgb(255 255 255 / 0.06);
+  }
 }

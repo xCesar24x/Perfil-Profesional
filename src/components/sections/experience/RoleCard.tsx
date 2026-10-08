@@ -120,7 +120,7 @@ export function RoleCard({ role }: { role: Role }) {
 
       <Bezel
         className={clsx(
-          "transition-shadow duration-500",
+          "role-card transition-shadow duration-500",
           flash === `role-${role.id}` && "animate-flash",
           open && "ring-ink/[0.09]",
         )}

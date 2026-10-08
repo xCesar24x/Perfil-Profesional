@@ -230,7 +230,7 @@ export function CommandPalette() {
             className="relative w-full max-w-xl rounded-[1.6rem] bg-paper/95 p-1.5 shadow-[0_40px_120px_-30px_rgba(16,26,20,0.65)] ring-1 ring-ink/10"
             onKeyDown={onKeyDown}
           >
-            <div className="overflow-hidden rounded-[calc(1.6rem-0.375rem)] bg-[#f8f7f3] ring-1 ring-ink/[0.05]">
+            <div className="overflow-hidden rounded-[calc(1.6rem-0.375rem)] bg-surface ring-1 ring-ink/[0.05]">
               <label className="flex items-center gap-3 border-b border-ink/[0.07] px-5">
                 <MagnifyingGlass size={18} weight="light" className="shrink-0 text-muted" />
                 <input

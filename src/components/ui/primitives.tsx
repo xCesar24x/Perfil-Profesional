@@ -132,7 +132,7 @@ export function Bezel({
         className={clsx(
           "h-full rounded-[calc(1.75rem-0.375rem)]",
           tone === "light"
-            ? "bg-[#f8f7f3] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_20px_40px_-28px_rgba(28,42,34,0.35)]"
+            ? "bg-surface shadow-[inset_0_1px_0_var(--bezel-highlight,rgb(255_255_255/0.9)),0_20px_40px_-28px_rgba(28,42,34,0.35)]"
             : "bg-deep/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_30px_60px_-30px_rgba(0,0,0,0.6)]",
           innerClassName,
         )}
