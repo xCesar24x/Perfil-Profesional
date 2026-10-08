@@ -4,6 +4,7 @@ import { MotionConfig } from "motion/react";
 import type { Lang } from "@/data/types";
 import { StoreProvider } from "@/lib/store";
 import { CommandPalette } from "./layout/CommandPalette";
+import { LaserPointer } from "./layout/LaserPointer";
 import { Nav } from "./layout/Nav";
 import { Certifications } from "./sections/Certifications";
 import { Contact } from "./sections/Contact";
@@ -18,6 +19,7 @@ function Page() {
     <>
       <Nav />
       <CommandPalette />
+      <LaserPointer />
       <main>
         <Hero />
         <Impact />

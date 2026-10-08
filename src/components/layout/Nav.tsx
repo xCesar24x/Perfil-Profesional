@@ -7,6 +7,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { profile } from "@/data/profile";
 import type { Lang } from "@/data/types";
 import { easeDrawer, easeOutExpo, springSnappy } from "@/lib/motion";
+import { useLaser } from "@/lib/laser";
 import { useStore } from "@/lib/store";
 import { Kbd } from "@/components/ui/primitives";
 
@@ -93,6 +94,7 @@ export function Nav() {
   const tone = DARK_SECTIONS.has(underNav) ? "dark" : "light";
   const [menuOpen, setMenuOpen] = useState(false);
   const isMac = useIsMac();
+  const [laser, setLaser] = useLaser();
 
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
@@ -198,6 +200,29 @@ export function Nav() {
               <Kbd tone={tone}>{isMac ? "⌘" : "Ctrl"}</Kbd>
               <Kbd tone={tone}>K</Kbd>
             </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setLaser(!laser)}
+            aria-pressed={laser}
+            aria-label={t.nav.laser}
+            title={t.nav.laser}
+            className={clsx(
+              "hidden size-9 items-center justify-center rounded-full transition-colors duration-300 [@media(pointer:fine)]:flex",
+              tone === "dark" ? "hover:bg-white/[0.07]" : "hover:bg-ink/[0.05]",
+            )}
+          >
+            <span
+              className={clsx(
+                "size-2.5 rounded-full transition-[background-color,box-shadow] duration-300",
+                laser
+                  ? "bg-[#ff3b30] shadow-[0_0_6px_2px_rgba(255,59,48,0.75)]"
+                  : tone === "dark"
+                    ? "ring-1 ring-bone/50"
+                    : "ring-1 ring-ink/40",
+              )}
+            />
           </button>
 
           <LangToggle tone={tone} />

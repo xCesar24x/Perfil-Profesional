@@ -305,3 +305,11 @@
     --bezel-highlight: rgb(255 255 255 / 0.06);
   }
 }
+
+/* The presentation laser replaces the system cursor on mouse-driven devices. */
+@media (hover: hover) and (pointer: fine) {
+  html.laser-on,
+  html.laser-on * {
+    cursor: none !important;
+  }
+}

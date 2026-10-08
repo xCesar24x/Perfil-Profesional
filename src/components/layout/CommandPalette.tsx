@@ -6,6 +6,7 @@ import {
   Briefcase,
   Certificate,
   Copy,
+  Crosshair,
   DownloadSimple,
   Hash,
   Lightning,
@@ -22,6 +23,7 @@ import { skillCategories, skills } from "@/data/skills";
 import { formatRange } from "@/lib/dates";
 import { matches } from "@/lib/evidence";
 import { easeDrawer, springSnappy } from "@/lib/motion";
+import { useLaser } from "@/lib/laser";
 import { useStore } from "@/lib/store";
 import { Kbd } from "@/components/ui/primitives";
 import { SECTIONS } from "./Nav";
@@ -46,6 +48,7 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const restoreFocus = useRef<HTMLElement | null>(null);
+  const [laser, setLaser] = useLaser();
 
   const close = () => setPaletteOpen(false);
 
@@ -104,6 +107,15 @@ export function CommandPalette() {
         run: () => store.switchLang(),
       },
       {
+        id: "action-laser",
+        group: t.palette.actions,
+        label: laser ? t.palette.laserOff : t.palette.laserOn,
+        hint: "L",
+        icon: <Crosshair {...iconProps} />,
+        keywords: "laser puntero pointer presentacion presentation",
+        run: () => setLaser(!laser),
+      },
+      {
         id: "action-expand",
         group: t.palette.actions,
         label: t.palette.expandAll,
@@ -138,7 +150,7 @@ export function CommandPalette() {
         run: () => void navigator.clipboard?.writeText(profile.email),
       },
     ];
-  }, [t, l, lang, store]);
+  }, [t, l, lang, store, laser, setLaser]);
 
   const results = useMemo(() => {
     if (!query.trim()) {

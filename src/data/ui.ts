@@ -12,6 +12,7 @@ const es = {
     menu: "Menú",
     close: "Cerrar",
     search: "Buscar",
+    laser: "Puntero láser (L)",
     switchTo: "Switch to English",
   },
   hero: {
@@ -138,6 +139,8 @@ const es = {
     downloadCv: "Descargar CV (español)",
     expandAll: "Expandir toda la experiencia",
     copyEmail: "Copiar correo",
+    laserOn: "Activar puntero láser",
+    laserOff: "Desactivar puntero láser",
   },
   durations: {
     year: (n: number) => (n === 1 ? "1 año" : `${n} años`),
@@ -160,6 +163,7 @@ const en: Dict = {
     menu: "Menu",
     close: "Close",
     search: "Search",
+    laser: "Laser pointer (L)",
     switchTo: "Cambiar a español",
   },
   hero: {
@@ -286,6 +290,8 @@ const en: Dict = {
     downloadCv: "Download résumé (English)",
     expandAll: "Expand all experience",
     copyEmail: "Copy email",
+    laserOn: "Turn on laser pointer",
+    laserOff: "Turn off laser pointer",
   },
   durations: {
     year: (n: number) => (n === 1 ? "1 yr" : `${n} yrs`),
