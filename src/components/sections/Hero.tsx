@@ -10,6 +10,7 @@ import { roles } from "@/data/roles";
 import { easeOutExpo } from "@/lib/motion";
 import { useStore } from "@/lib/store";
 import { Bezel, Counter, Eyebrow, IslandButton } from "@/components/ui/primitives";
+import leaves from "@/assets/hero-leaves.jpg";
 import portrait from "@/assets/portrait.jpg";
 import { FloatingDots } from "./FloatingDots";
 
@@ -100,7 +101,21 @@ export function Hero() {
           </div>
 
           <div className="enter-card lg:col-span-5" style={delay(0.6)}>
-            <Bezel tone="dark" innerClassName="p-6 sm:p-7">
+            <Bezel tone="dark" innerClassName="relative isolate overflow-hidden p-6 sm:p-7">
+              <Image
+                src={leaves}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 34vw, 100vw"
+                loading="eager"
+                placeholder="blur"
+                className="-z-20 object-cover"
+              />
+              {/* Green veil: lets the leaves read as texture while keeping every label legible. */}
+              <div
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(29,44,36,0.72)_0%,rgba(29,44,36,0.58)_38%,rgba(29,44,36,0.82)_100%)]"
+              />
               <div className="flex items-center gap-4">
                 <div className="relative shrink-0">
                   <Image
@@ -111,7 +126,7 @@ export function Hero() {
                     placeholder="blur"
                     className="size-[4.5rem] rounded-full object-cover ring-1 ring-white/15"
                   />
-                  <span className="absolute -right-0.5 -bottom-0.5 size-3.5 animate-pulse-dot rounded-full bg-sage ring-[3px] ring-deep" />
+                  <span className="absolute -right-0.5 -bottom-0.5 size-3.5 animate-pulse-dot rounded-full bg-sage ring-[3px] ring-abyss" />
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-[15.5px] font-medium text-bone">{profile.name}</p>
@@ -129,7 +144,7 @@ export function Hero() {
                     <button
                       type="button"
                       onClick={() => focusRole(role.id)}
-                      className="group flex w-full items-center justify-between gap-4 rounded-2xl bg-white/[0.035] px-4 py-3.5 text-left ring-1 ring-white/[0.06] transition-[background-color,transform] duration-500 ease-drawer hover:bg-white/[0.07] active:scale-[0.99]"
+                      className="group flex w-full items-center justify-between gap-4 rounded-2xl bg-abyss/55 px-4 py-3.5 text-left ring-1 ring-white/[0.08] transition-[background-color,transform] duration-500 ease-drawer hover:bg-abyss/75 active:scale-[0.99]"
                     >
                       <span className="min-w-0">
                         <span className="block truncate text-[15px] font-medium text-bone">{l(role.title)}</span>
@@ -143,9 +158,9 @@ export function Hero() {
                 ))}
               </ul>
 
-              <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/[0.07] ring-1 ring-white/[0.06]">
+              <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/[0.08] ring-1 ring-white/[0.08]">
                 {stats.map((s, i) => (
-                  <div key={s.label} className="bg-deep px-4 py-5 sm:px-5">
+                  <div key={s.label} className="bg-abyss/65 px-4 py-5 sm:px-5">
                     <dt className="sr-only">{s.label}</dt>
                     <dd>
                       <Counter
@@ -165,7 +180,7 @@ export function Hero() {
                   {profile.openTo.map((item) => (
                     <li
                       key={item.en}
-                      className="rounded-full bg-sage/[0.12] px-3 py-1 text-[12px] text-sage-soft ring-1 ring-sage/20"
+                      className="rounded-full bg-abyss/55 px-3 py-1 text-[12px] text-sage-soft ring-1 ring-sage/25"
                     >
                       {l(item)}
                     </li>
