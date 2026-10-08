@@ -29,7 +29,7 @@ function LevelScale({ level, delay }: { level: number; delay: number }) {
             <div
               className={clsx(
                 "overflow-hidden rounded-full bg-white/[0.07]",
-                current ? "h-2.5 ring-1 ring-sage/40" : "h-1.5",
+                current ? "h-2.5 ring-1 ring-brass/50" : "h-1.5",
               )}
             >
               {(current || below) && (
@@ -37,7 +37,7 @@ function LevelScale({ level, delay }: { level: number; delay: number }) {
                   className={clsx(
                     "h-full origin-left rounded-full",
                     current
-                      ? "bg-gradient-to-r from-sage to-bone shadow-[0_0_14px_rgba(163,177,138,0.6)]"
+                      ? "bg-gradient-to-r from-brass to-brass-light shadow-[0_0_14px_rgba(200,161,90,0.65)]"
                       : "bg-sage/25",
                   )}
                   initial={{ scaleX: 0 }}
@@ -48,8 +48,8 @@ function LevelScale({ level, delay }: { level: number; delay: number }) {
             </div>
             <span
               className={clsx(
-                "mt-2 block text-center font-mono text-[10px]",
-                current ? "font-semibold text-bone" : below ? "text-bone/40" : "text-bone/25",
+                "mt-2 block text-center font-mono text-[10.5px]",
+                current ? "font-semibold text-brass-light" : below ? "text-bone/60" : "text-bone/30",
               )}
             >
               {c}
@@ -112,7 +112,7 @@ export function Education() {
                 <span className="flex size-10 items-center justify-center rounded-full bg-white/[0.07] text-sage">
                   <Translate size={20} weight="light" />
                 </span>
-                <p className="font-mono text-[11px] tracking-[0.2em] text-sage uppercase">{t.education.languages}</p>
+                <p className="font-mono text-[11px] tracking-[0.2em] text-sage-soft uppercase">{t.education.languages}</p>
               </div>
 
               <ul className="mt-8 mb-10 space-y-9">
@@ -131,11 +131,11 @@ export function Education() {
               </ul>
 
               <div className="mt-auto border-t border-white/[0.08] pt-6 lg:mt-12">
-                <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">
+                <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">
                   {t.education.availability}
                 </p>
                 <p className="mt-2 font-display text-[1.65rem] leading-tight text-bone">{l(profile.availability)}</p>
-                <p className="mt-1 text-[13px] text-bone/55">{l(profile.location)}</p>
+                <p className="mt-1 text-[13px] text-bone/65">{l(profile.location)}</p>
               </div>
             </Bezel>
           </Reveal>

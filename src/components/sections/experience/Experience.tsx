@@ -41,7 +41,7 @@ function ChapterFilter() {
             )}
             {o.id !== "all" && <span className={clsx("size-1.5 rounded-full", chapterColor[o.id])} />}
             {o.label}
-            <span className={clsx("font-mono text-[10.5px]", chapter === o.id ? "text-paper/60" : "text-muted/70")}>
+            <span className={clsx("font-mono text-[11px]", chapter === o.id ? "text-paper/60" : "text-muted")}>
               {o.count}
             </span>
           </button>

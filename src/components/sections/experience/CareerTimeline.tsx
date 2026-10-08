@@ -116,7 +116,7 @@ export function CareerTimeline() {
             {years.map((y) => (
               <span
                 key={y}
-                className="absolute -translate-x-1/2 font-mono text-[10.5px] text-muted/80"
+                className="absolute -translate-x-1/2 font-mono text-[11px] text-muted"
                 style={{ left: `${pos(y)}%` }}
               >
                 {y}

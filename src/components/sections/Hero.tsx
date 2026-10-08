@@ -115,14 +115,14 @@ export function Hero() {
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-[15.5px] font-medium text-bone">{profile.name}</p>
-                  <p className="mt-1 flex items-center gap-1.5 text-[12.5px] text-bone/55">
+                  <p className="mt-1 flex items-center gap-1.5 text-[12.5px] text-bone/65">
                     <MapPin size={14} weight="light" />
                     {l(profile.location)}
                   </p>
                 </div>
               </div>
 
-              <p className="mt-6 font-mono text-[11px] tracking-[0.2em] text-sage uppercase">{t.hero.currently}</p>
+              <p className="mt-6 font-mono text-[11px] tracking-[0.2em] text-sage-soft uppercase">{t.hero.currently}</p>
               <ul className="mt-3 space-y-2">
                 {current.map((role) => (
                   <li key={role.id}>
@@ -133,7 +133,7 @@ export function Hero() {
                     >
                       <span className="min-w-0">
                         <span className="block truncate text-[15px] font-medium text-bone">{l(role.title)}</span>
-                        <span className="mt-0.5 block text-[13px] text-bone/55">{role.company}</span>
+                        <span className="mt-0.5 block text-[13px] text-bone/65">{role.company}</span>
                       </span>
                       <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/[0.06] text-bone/70 transition-transform duration-500 ease-drawer group-hover:translate-x-0.5 group-hover:-translate-y-px group-hover:text-bone">
                         <ArrowUpRight size={15} weight="light" />
@@ -151,16 +151,16 @@ export function Hero() {
                       <Counter
                         value={s.value}
                         delay={0.9 + i * 0.08}
-                        className="block font-display text-[2.9rem] leading-none tracking-[-0.03em] text-bone"
+                        className="block font-display text-[2.9rem] leading-none tracking-[-0.03em] text-brass-light"
                       />
-                      <span className="mt-2 block text-[12.5px] leading-snug text-bone/55">{s.label}</span>
+                      <span className="mt-2 block text-[12.5px] leading-snug text-bone/65">{s.label}</span>
                     </dd>
                   </div>
                 ))}
               </dl>
 
               <div className="mt-6">
-                <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">{t.hero.openTo}</p>
+                <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">{t.hero.openTo}</p>
                 <ul className="mt-3 flex flex-wrap gap-1.5">
                   {profile.openTo.map((item) => (
                     <li
@@ -181,9 +181,9 @@ export function Hero() {
         type="button"
         onClick={() => scrollToSection("impact")}
         style={delay(1.6)}
-        className="enter-rise absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-bone/45 transition-colors hover:text-bone/80 md:flex"
+        className="enter-rise absolute bottom-7 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 text-bone/60 transition-colors hover:text-bone/80 md:flex"
       >
-        <span className="font-mono text-[10px] tracking-[0.3em] uppercase">{t.hero.scroll}</span>
+        <span className="font-mono text-[10.5px] tracking-[0.3em] uppercase">{t.hero.scroll}</span>
         <span className="relative h-10 w-px overflow-hidden bg-white/10">
           <motion.span
             className="absolute inset-x-0 top-0 h-1/2 bg-sage"

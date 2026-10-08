@@ -162,7 +162,7 @@ export function Nav() {
                         ? "text-bone"
                         : "text-ink"
                       : tone === "dark"
-                        ? "text-bone/55 hover:text-bone"
+                        ? "text-bone/65 hover:text-bone"
                         : "text-muted hover:text-ink",
                   )}
                 >
@@ -252,7 +252,7 @@ export function Nav() {
                       transition={{ duration: 0.8, ease: easeOutExpo, delay: 0.08 + i * 0.05 }}
                       className={clsx(
                         "flex w-full items-baseline gap-4 py-1.5 text-left font-display text-[2.6rem] leading-tight",
-                        active === id ? "text-bone" : "text-bone/45",
+                        active === id ? "text-bone" : "text-bone/60",
                       )}
                     >
                       <span className="font-mono text-[11px] tracking-widest text-sage">0{i + 1}</span>

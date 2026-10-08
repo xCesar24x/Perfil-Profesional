@@ -67,13 +67,13 @@ function CertCard({ cert }: { cert: Certification }) {
           <IssuerMark issuer={cert.issuer} />
           <span className="min-w-0 flex-1">
             <span className="flex flex-wrap items-center gap-1.5">
-              <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted uppercase">{l(category.label)}</span>
+              <span className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">{l(category.label)}</span>
               {cert.path && (
-                <span className="rounded-full bg-fern/10 px-2 py-0.5 text-[10.5px] font-medium text-hunter">
+                <span className="rounded-full bg-fern/10 px-2 py-0.5 text-[11px] font-medium text-hunter">
                   {t.certs.path}
                 </span>
               )}
-              {cert.featured && <Star size={12} weight="fill" className="text-fern" aria-label={t.certs.featured} />}
+              {cert.featured && <Star size={12} weight="fill" className="text-brass" aria-label={t.certs.featured} />}
             </span>
             <span className="mt-1.5 block text-[15px] leading-snug font-medium text-ink text-pretty">{l(cert.name)}</span>
             <span className="mt-1 block text-[12.5px] text-muted">
@@ -104,7 +104,7 @@ function CertCard({ cert }: { cert: Certification }) {
             >
               <div className="space-y-4 border-t border-ink/[0.06] px-5 pt-4 pb-5">
                 <div>
-                  <p className="font-mono text-[10.5px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</p>
+                  <p className="font-mono text-[11px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</p>
                   <ul className="mt-2 flex flex-wrap gap-1.5">
                     {cert.skills.map((id) => {
                       const skill = skillById.get(id);
@@ -177,7 +177,7 @@ function FeaturedCredential({ cert, delay }: { cert: Certification; delay: numbe
           </p>
           <p className="mt-2 text-[13px] text-muted">{cert.issuer}</p>
           <p className="mt-5 border-t border-ink/[0.07] pt-4 text-[12.5px] leading-relaxed text-muted">
-            <span className="font-mono text-[10px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</span>
+            <span className="font-mono text-[10.5px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</span>
             <br />
             {cert.skills
               .map((id) => skillById.get(id))
@@ -237,12 +237,12 @@ export function Certifications() {
             <Bezel tone="dark" className="h-full bg-brunswick/90" innerClassName="flex h-full flex-col p-6 sm:p-7" data-tone="dark">
               <Counter
                 value={String(certifications.length)}
-                className="font-display text-[clamp(4.5rem,8vw,6.5rem)] leading-[0.85] tracking-[-0.045em] text-bone"
+                className="font-display text-[clamp(4.5rem,8vw,6.5rem)] leading-[0.85] tracking-[-0.045em] text-brass-light"
               />
               <p className="mt-3 text-[15px] text-bone/70">{t.hero.stats.certifications}</p>
 
               <div className="mt-8">
-                <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">{t.certs.byYear}</p>
+                <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">{t.certs.byYear}</p>
                 <ul className="mt-4 flex h-28 items-end gap-3">
                   {byYear.map(([year, n], i) => (
                     <li key={year} className="flex h-full flex-1 flex-col items-center justify-end gap-2">
@@ -255,14 +255,14 @@ export function Certifications() {
                         viewport={{ once: true }}
                         transition={{ duration: 1.1, ease: easeOutExpo, delay: 0.2 + i * 0.08 }}
                       />
-                      <span className="font-mono text-[10.5px] text-bone/50">{year}</span>
+                      <span className="font-mono text-[11px] text-bone/60">{year}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <div className="mt-auto pt-8">
-                <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">{t.certs.issuer}</p>
+                <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">{t.certs.issuer}</p>
                 <ul className="mt-3 -mx-3 space-y-0.5">
                   {issuers.map((issuer) => (
                     <li key={issuer}>
@@ -284,7 +284,7 @@ export function Certifications() {
                           />
                           {issuer}
                         </span>
-                        <span className={clsx("font-mono", certIssuer === issuer ? "text-abyss/60" : "text-bone/50")}>
+                        <span className={clsx("font-mono", certIssuer === issuer ? "text-abyss/60" : "text-bone/60")}>
                           {certifications.filter((c) => c.issuer === issuer).length}
                         </span>
                       </button>
@@ -329,7 +329,7 @@ export function Certifications() {
                       />
                     )}
                     {o.label}
-                    <span className={clsx("font-mono text-[10.5px]", certCategory === o.id ? "text-paper/60" : "text-muted/70")}>
+                    <span className={clsx("font-mono text-[11px]", certCategory === o.id ? "text-paper/60" : "text-muted")}>
                       {o.count}
                     </span>
                   </button>
@@ -368,7 +368,7 @@ export function Certifications() {
                   value={certQuery}
                   onChange={(e) => setCertQuery(e.target.value)}
                   placeholder={t.certs.search}
-                  className="h-11 w-full rounded-full pr-9 pl-10 text-[13px] text-ink outline-none placeholder:text-muted/70 focus:ring-fern bg-paper/80 shadow-[0_12px_40px_-18px_rgba(28,42,34,0.4)] ring-1 ring-ink/[0.08] backdrop-blur-xl"
+                  className="h-11 w-full rounded-full pr-9 pl-10 text-[13px] text-ink outline-none placeholder:text-muted focus:ring-fern bg-paper/80 shadow-[0_12px_40px_-18px_rgba(28,42,34,0.4)] ring-1 ring-ink/[0.08] backdrop-blur-xl"
                 />
                 {certQuery && (
                   <button

@@ -39,10 +39,10 @@ export function Eyebrow({ children, tone = "light" }: { children: ReactNode; ton
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-2 rounded-full px-3 py-1 font-mono text-[10.5px] font-medium uppercase tracking-[0.12em] sm:tracking-[0.22em]",
+        "inline-flex items-center gap-2 rounded-full px-3 py-1 font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] sm:text-[11px] sm:tracking-[0.22em]",
         tone === "light"
           ? "bg-ink/[0.04] text-hunter ring-1 ring-ink/[0.07]"
-          : "bg-white/[0.06] text-sage ring-1 ring-white/10",
+          : "bg-white/[0.06] text-sage-soft ring-1 ring-white/10",
       )}
     >
       <span className={clsx("size-1.5 rounded-full", tone === "light" ? "bg-fern" : "bg-sage")} />
@@ -170,7 +170,7 @@ export function IslandButton({
     "transition-[transform,background-color,color,box-shadow] duration-500 ease-drawer active:scale-[0.97]",
     variant === "solid" &&
       tone === "dark" &&
-      "bg-bone text-abyss shadow-[0_10px_30px_-12px_rgba(163,177,138,0.55)] hover:bg-[#e6e3da]",
+      "bg-brass text-abyss shadow-[0_10px_30px_-12px_rgba(200,161,90,0.6)] hover:bg-brass-light",
     variant === "solid" && tone === "light" && "bg-hunter text-paper hover:bg-brunswick",
     variant === "ghost" && tone === "dark" && "text-bone ring-1 ring-white/15 hover:bg-white/[0.06]",
     variant === "ghost" && tone === "light" && "text-ink ring-1 ring-ink/15 hover:bg-ink/[0.04]",
@@ -265,7 +265,7 @@ export function Kbd({ children, tone = "light" }: { children: ReactNode; tone?: 
   return (
     <kbd
       className={clsx(
-        "inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5 font-mono text-[10.5px] font-medium",
+        "inline-flex h-5 min-w-5 items-center justify-center rounded-md px-1.5 font-mono text-[11px] font-medium",
         tone === "light" ? "bg-ink/[0.06] text-muted ring-1 ring-ink/10" : "bg-white/10 text-bone/80 ring-1 ring-white/10",
       )}
     >

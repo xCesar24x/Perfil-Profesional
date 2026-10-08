@@ -241,7 +241,7 @@ export function CommandPalette() {
                     setActive(0);
                   }}
                   placeholder={t.palette.placeholder}
-                  className="h-14 w-full bg-transparent text-[15px] text-ink outline-none placeholder:text-muted/70"
+                  className="h-14 w-full bg-transparent text-[15px] text-ink outline-none placeholder:text-muted"
                   role="combobox"
                   aria-expanded="true"
                   aria-controls="palette-list"
@@ -254,7 +254,7 @@ export function CommandPalette() {
                 {grouped.length === 0 && <p className="px-3 py-10 text-center text-[14px] text-muted">{t.palette.empty}</p>}
                 {grouped.map((g) => (
                   <div key={g.name} className="mb-1">
-                    <p className="px-3 pt-3 pb-1.5 font-mono text-[10.5px] tracking-[0.18em] text-muted uppercase">{g.name}</p>
+                    <p className="px-3 pt-3 pb-1.5 font-mono text-[11px] tracking-[0.18em] text-muted uppercase">{g.name}</p>
                     {g.items.map((item) => (
                       <button
                         key={item.id}

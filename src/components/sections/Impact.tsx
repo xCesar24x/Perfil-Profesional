@@ -25,7 +25,7 @@ function CardFooter({ roleId, tone }: { roleId: string; tone: Tone }) {
         <span className={clsx("block truncate text-[13px] font-medium", tone === "dark" ? "text-bone" : "text-ink")}>
           {role.company}
         </span>
-        <span className={clsx("block truncate text-[12px]", tone === "dark" ? "text-bone/50" : "text-muted")}>
+        <span className={clsx("block truncate text-[12px]", tone === "dark" ? "text-bone/60" : "text-muted")}>
           {l(role.title)}
         </span>
       </span>
@@ -61,7 +61,7 @@ function ImpactCard({ item, className, delay }: { item: ImpactItem; className?: 
         <Bezel innerClassName="flex h-full flex-col p-6 sm:p-7" className="h-full">
           <Counter
             value={item.value}
-            className="font-display text-[clamp(3rem,5vw,4.25rem)] leading-none tracking-[-0.035em] text-hunter"
+            className="font-display text-[clamp(3rem,5vw,4.25rem)] leading-none tracking-[-0.035em] text-brass-deep"
           />
           <p className="mt-3 text-[15px] font-medium text-ink">{l(item.label)}</p>
           <p className="mt-1.5 mb-6 text-[13.5px] leading-relaxed text-muted text-pretty">{l(item.context)}</p>
@@ -92,7 +92,7 @@ function FeatureCard({ item }: { item: ImpactItem }) {
         >
           <Counter
             value={item.value}
-            className="font-display text-[clamp(5rem,11vw,9.5rem)] leading-[0.85] tracking-[-0.045em] text-bone"
+            className="font-display text-[clamp(5rem,11vw,9.5rem)] leading-[0.85] tracking-[-0.045em] text-brass-light"
           />
           <p className="mt-4 text-[17px] font-medium text-bone">{l(item.label)}</p>
           <p className="mt-2 max-w-md text-[14.5px] leading-relaxed text-bone/60">{l(item.context)}</p>
@@ -104,11 +104,11 @@ function FeatureCard({ item }: { item: ImpactItem }) {
                 <div key={m.label.en}>
                   <div className="mb-2 flex items-baseline justify-between text-[13px]">
                     <span className="text-bone/70">{l(m.label)}</span>
-                    <span className="font-mono text-sage">{m.value}</span>
+                    <span className="font-mono text-brass-light">{m.value}</span>
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
                     <motion.div
-                      className="h-full origin-left rounded-full bg-gradient-to-r from-fern to-sage"
+                      className="h-full origin-left rounded-full bg-gradient-to-r from-brass/70 to-brass-light"
                       style={{ width: `${(pct / 35) * 100}%` }}
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 1 }}
@@ -141,7 +141,7 @@ function CountriesCard() {
           <div className="shrink-0">
             <Counter
               value={String(countries.length)}
-              className="font-display text-[clamp(3rem,5vw,4.25rem)] leading-none tracking-[-0.035em] text-hunter"
+              className="font-display text-[clamp(3rem,5vw,4.25rem)] leading-none tracking-[-0.035em] text-brass-deep"
             />
             <p className="mt-3 text-[15px] font-medium text-ink">{t.impact.countriesTitle}</p>
             <p className="mt-1 max-w-[14rem] text-[13.5px] leading-relaxed text-muted">{t.impact.countriesLabel}</p>

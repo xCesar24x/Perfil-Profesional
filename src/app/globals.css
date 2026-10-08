@@ -8,6 +8,11 @@
   --color-hunter: #3a5a40;
   --color-brunswick: #344e41;
 
+  /* Accent — used sparingly (≈10%) for metrics, primary actions and highlights */
+  --color-brass: #c8a15a;
+  --color-brass-light: #d9b872;
+  --color-brass-deep: #8c6b2f;
+
   /* Derived tints and shades of the same family */
   --color-paper: #f2f1ec;
   --color-paper-2: #e8e6de;
@@ -270,6 +275,11 @@
   inherits: true;
   initial-value: #3a5a40;
 }
+@property --color-brass-deep {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #8c6b2f;
+}
 @property --color-fern {
   syntax: "<color>";
   inherits: true;
@@ -277,7 +287,8 @@
 }
 
 .role-card {
-  transition-property: --color-ink, --color-paper, --color-surface, --color-muted, --color-hunter, --color-fern;
+  transition-property:
+    --color-ink, --color-paper, --color-surface, --color-muted, --color-hunter, --color-fern, --color-brass-deep;
   transition-duration: 0.45s;
   transition-timing-function: var(--ease-drawer);
 }
@@ -290,6 +301,7 @@
     --color-muted: #a8b2a5;
     --color-hunter: #a3b18a;
     --color-fern: #c8d0b8;
+    --color-brass-deep: #d9b872;
     --bezel-highlight: rgb(255 255 255 / 0.06);
   }
 }

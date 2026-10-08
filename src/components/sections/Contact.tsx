@@ -107,7 +107,7 @@ export function Contact() {
           </div>
         </Reveal>
 
-        <footer className="mt-24 flex flex-col gap-6 border-t border-white/[0.08] pt-8 text-[12.5px] text-bone/45 sm:flex-row sm:items-center sm:justify-between lg:mt-36">
+        <footer className="mt-24 flex flex-col gap-6 border-t border-white/[0.08] pt-8 text-[12.5px] text-bone/60 sm:flex-row sm:items-center sm:justify-between lg:mt-36">
           <p>
             © {year} {profile.name} · {l(profile.location)}
           </p>

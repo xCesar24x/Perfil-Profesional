@@ -111,7 +111,9 @@ export function renderOgImage(lang: Lang) {
                 border: "1px solid rgba(255,255,255,0.09)",
               }}
             >
-              <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 52, lineHeight: 1 }}>{value}</div>
+              <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 52, lineHeight: 1, color: "#d9b872" }}>
+                {value}
+              </div>
               <div style={{ display: "flex", marginTop: 6, fontSize: 19, color: "rgba(218,215,205,0.6)" }}>
                 {copy[lang].stats[i]}
               </div>

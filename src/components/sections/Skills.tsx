@@ -44,7 +44,7 @@ function SkillDetail() {
           transition={{ duration: 0.55, ease: easeOutExpo }}
           aria-live="polite"
         >
-          <p className="font-mono text-[10.5px] tracking-[0.2em] text-sage uppercase">{l(category.label)}</p>
+          <p className="font-mono text-[11px] tracking-[0.2em] text-sage-soft uppercase">{l(category.label)}</p>
           <h3 className="mt-3 font-display text-[clamp(2.2rem,3.4vw,3rem)] leading-none tracking-[-0.02em] text-bone">
             {l(skill.name)}
           </h3>
@@ -57,14 +57,14 @@ function SkillDetail() {
               { k: t.skills.backedBy, v: String(evidence.certs.length) },
             ].map((s) => (
               <div key={s.k} className="bg-abyss/60 px-3 py-3.5">
-                <dd className="font-display text-[1.6rem] leading-none text-bone">{s.v}</dd>
-                <dt className="mt-1.5 text-[11px] leading-tight text-bone/50">{s.k}</dt>
+                <dd className="font-display text-[1.6rem] leading-none text-brass-light">{s.v}</dd>
+                <dt className="mt-1.5 text-[11px] leading-tight text-bone/60">{s.k}</dt>
               </div>
             ))}
           </dl>
 
           <div className="mt-7">
-            <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">
               {t.skills.appliedIn} · {t.skills.roleCount(evidence.roles.length)}
             </p>
             {evidence.roles.length ? (
@@ -78,7 +78,7 @@ function SkillDetail() {
                     >
                       <span className="min-w-0">
                         <span className="block truncate text-[13.5px] text-bone">{l(r.title)}</span>
-                        <span className="block truncate text-[12px] text-bone/50">
+                        <span className="block truncate text-[12px] text-bone/60">
                           {r.company} · {formatRange(r.start, r.end, t)}
                         </span>
                       </span>
@@ -92,12 +92,12 @@ function SkillDetail() {
                 ))}
               </ul>
             ) : (
-              <p className="mt-3 text-[13px] text-bone/55">{t.skills.noRoles}</p>
+              <p className="mt-3 text-[13px] text-bone/65">{t.skills.noRoles}</p>
             )}
           </div>
 
           <div className="mt-6">
-            <p className="font-mono text-[10.5px] tracking-[0.2em] text-bone/45 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-bone/60 uppercase">
               {t.skills.backedBy} · {t.skills.certCount(evidence.certs.length)}
             </p>
             {evidence.certs.length ? (
@@ -116,7 +116,7 @@ function SkillDetail() {
                 ))}
               </ul>
             ) : (
-              <p className="mt-3 text-[13px] text-bone/55">{t.skills.noCerts}</p>
+              <p className="mt-3 text-[13px] text-bone/65">{t.skills.noCerts}</p>
             )}
           </div>
         </motion.div>
@@ -199,14 +199,14 @@ export function Skills() {
               <MagnifyingGlass
                 size={16}
                 weight="light"
-                className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-bone/45"
+                className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-bone/60"
               />
               <input
                 type="search"
                 value={skillQuery}
                 onChange={(e) => setSkillQuery(e.target.value)}
                 placeholder={t.skills.search}
-                className="w-full rounded-full bg-white/[0.05] py-3 pr-10 pl-11 text-[14px] text-bone ring-1 ring-white/10 transition-shadow duration-300 outline-none placeholder:text-bone/40 focus:ring-sage/50"
+                className="w-full rounded-full bg-white/[0.05] py-3 pr-10 pl-11 text-[14px] text-bone ring-1 ring-white/10 transition-shadow duration-300 outline-none placeholder:text-bone/55 focus:ring-sage/50"
               />
               {skillQuery && (
                 <button
@@ -242,8 +242,8 @@ export function Skills() {
                     <span className="font-medium">{c.label}</span>
                     <span
                       className={clsx(
-                        "font-mono text-[10.5px]",
-                        skillCategory === c.id ? "text-abyss/55" : "text-bone/35",
+                        "font-mono text-[11px]",
+                        skillCategory === c.id ? "text-abyss/55" : "text-bone/45",
                       )}
                     >
                       {String(c.count).padStart(2, "0")}
@@ -309,8 +309,8 @@ export function Skills() {
                         )}
                         <span
                           className={clsx(
-                            "font-mono text-[10px]",
-                            active ? "text-abyss/55" : "text-bone/35",
+                            "font-mono text-[10.5px]",
+                            active ? "text-abyss/55" : "text-bone/45",
                           )}
                         >
                           {evidenceCount.get(s.id)}
@@ -322,9 +322,9 @@ export function Skills() {
               </AnimatePresence>
             </ul>
 
-            {visible.length === 0 && <p className="mt-6 text-[14px] text-bone/55">{t.skills.empty}</p>}
+            {visible.length === 0 && <p className="mt-6 text-[14px] text-bone/65">{t.skills.empty}</p>}
 
-            <p className="mt-8 flex items-center gap-2 text-[12px] text-bone/45">
+            <p className="mt-8 flex items-center gap-2 text-[12px] text-bone/60">
               <span className="size-1.5 rounded-full bg-sage" /> {t.skills.core}
               <span className="mx-2 text-bone/20">·</span>
               <span className="font-mono">n</span> = {t.skills.appliedIn.toLowerCase()} + {t.skills.backedBy.toLowerCase()}

@@ -175,7 +175,7 @@ export function RoleCard({ role }: { role: Role }) {
                       key={m.label.en}
                       className="mt-4 rounded-full bg-paper px-3 py-1 text-[12px] text-ink ring-1 ring-ink/[0.07]"
                     >
-                      <span className="font-semibold text-hunter">{m.value}</span> {l(m.label)}
+                      <span className="font-semibold text-brass-deep">{m.value}</span> {l(m.label)}
                     </li>
                   ))}
                 </motion.ul>
@@ -211,7 +211,7 @@ export function RoleCard({ role }: { role: Role }) {
                       onClick={() => focusRole(promotedFrom.id)}
                       className="group/p text-left text-[12.5px] leading-snug text-muted transition-colors hover:text-ink"
                     >
-                      <span className="block font-mono text-[10.5px] tracking-[0.16em] text-hunter uppercase">
+                      <span className="block font-mono text-[11px] tracking-[0.16em] text-hunter uppercase">
                         {t.experience.promotedFrom}
                       </span>
                       <span className="mt-1 block underline decoration-ink/20 underline-offset-4 group-hover/p:decoration-fern">
@@ -258,7 +258,7 @@ export function RoleCard({ role }: { role: Role }) {
                             <div key={m.label.en} className="bg-paper px-4 py-4">
                               <dt className="sr-only">{l(m.label)}</dt>
                               <dd>
-                                <span className="block font-display text-[2rem] leading-none tracking-[-0.03em] text-hunter">
+                                <span className="block font-display text-[2rem] leading-none tracking-[-0.03em] text-brass-deep">
                                   {m.value}
                                 </span>
                                 <span className="mt-1.5 block text-[12px] leading-snug text-muted">{l(m.label)}</span>
