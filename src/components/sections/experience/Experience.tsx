@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowsInSimple, ArrowsOutSimple } from "@phosphor-icons/react";
+import { ArrowsInSimple, ArrowsOutSimple, Path } from "@phosphor-icons/react";
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { chapters, roles } from "@/data/roles";
@@ -52,7 +52,7 @@ function ChapterFilter() {
 }
 
 export function Experience() {
-  const { t, l, chapter, openRoles, setAllRoles } = useStore();
+  const { t, l, chapter, openRoles, setAllRoles, setTimelineOpen } = useStore();
   const visibleChapters = chapters.filter((c) => chapter === "all" || c.id === chapter);
   const allOpen = openRoles.size === roles.length;
 
@@ -73,15 +73,26 @@ export function Experience() {
           <div className="pointer-events-auto min-w-0">
             <ChapterFilter />
           </div>
-          <button
-            type="button"
-            onClick={() => setAllRoles(!allOpen)}
-            aria-label={allOpen ? t.experience.collapseAll : t.experience.expandAll}
-            className="pointer-events-auto inline-flex shrink-0 items-center gap-2 rounded-full p-3 text-[13px] font-medium text-ink transition-[background-color,transform] duration-300 hover:bg-paper active:scale-[0.97] sm:px-4 sm:py-2.5 bg-paper/80 shadow-[0_12px_40px_-18px_rgba(28,42,34,0.4)] ring-1 ring-ink/[0.08] backdrop-blur-xl"
-          >
-            {allOpen ? <ArrowsInSimple size={15} weight="light" /> : <ArrowsOutSimple size={15} weight="light" />}
-            <span className="hidden sm:inline">{allOpen ? t.experience.collapseAll : t.experience.expandAll}</span>
-          </button>
+          <div className="pointer-events-auto flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setTimelineOpen(true)}
+              aria-label={t.experience.timelineView}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-hunter p-3 text-[13px] font-medium text-paper shadow-[0_12px_40px_-18px_rgba(28,42,34,0.6)] transition-[background-color,transform] duration-300 hover:bg-brunswick active:scale-[0.97] sm:px-4 sm:py-2.5"
+            >
+              <Path size={15} weight="light" />
+              <span className="hidden sm:inline">{t.experience.timelineView}</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setAllRoles(!allOpen)}
+              aria-label={allOpen ? t.experience.collapseAll : t.experience.expandAll}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full p-3 text-[13px] font-medium text-ink transition-[background-color,transform] duration-300 hover:bg-paper active:scale-[0.97] sm:px-4 sm:py-2.5 bg-paper/80 shadow-[0_12px_40px_-18px_rgba(28,42,34,0.4)] ring-1 ring-ink/[0.08] backdrop-blur-xl"
+            >
+              {allOpen ? <ArrowsInSimple size={15} weight="light" /> : <ArrowsOutSimple size={15} weight="light" />}
+              <span className="hidden sm:inline">{allOpen ? t.experience.collapseAll : t.experience.expandAll}</span>
+            </button>
+          </div>
         </div>
 
         <div className="relative mt-4">

@@ -11,6 +11,7 @@ import {
   Hash,
   Lightning,
   MagnifyingGlass,
+  Path,
   Translate,
 } from "@phosphor-icons/react";
 import { clsx } from "clsx";
@@ -105,6 +106,14 @@ export function CommandPalette() {
         icon: <Translate {...iconProps} />,
         keywords: "language idioma english español",
         run: () => store.switchLang(),
+      },
+      {
+        id: "action-timeline",
+        group: t.palette.actions,
+        label: t.palette.timeline,
+        icon: <Path {...iconProps} />,
+        keywords: "timeline linea tiempo trayectoria resumen summary",
+        run: () => store.setTimelineOpen(true),
       },
       {
         id: "action-laser",

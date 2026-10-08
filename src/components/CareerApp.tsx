@@ -10,6 +10,7 @@ import { Certifications } from "./sections/Certifications";
 import { Contact } from "./sections/Contact";
 import { Education } from "./sections/Education";
 import { Experience } from "./sections/experience/Experience";
+import { TimelineView } from "./sections/experience/TimelineView";
 import { Hero } from "./sections/Hero";
 import { Impact } from "./sections/Impact";
 import { Skills } from "./sections/Skills";
@@ -19,6 +20,7 @@ function Page() {
     <>
       <Nav />
       <CommandPalette />
+      <TimelineView />
       <LaserPointer />
       <main>
         <Hero />

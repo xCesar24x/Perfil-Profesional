@@ -55,6 +55,9 @@ type Store = {
 
   paletteOpen: boolean;
   setPaletteOpen: (open: boolean) => void;
+
+  timelineOpen: boolean;
+  setTimelineOpen: (open: boolean) => void;
 };
 
 const StoreContext = createContext<Store | null>(null);
@@ -86,6 +89,7 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
   const [certQuery, setCertQuery] = useState("");
   const [flash, setFlash] = useState<string | null>(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [timelineOpen, setTimelineOpen] = useState(false);
   const flashTimer = useRef<number | undefined>(undefined);
 
   const t = dictionaries[lang];
@@ -234,6 +238,8 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
       scrollToSection,
       paletteOpen,
       setPaletteOpen,
+      timelineOpen,
+      setTimelineOpen,
     }),
     [
       lang,
@@ -257,6 +263,7 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
       focusCert,
       scrollToSection,
       paletteOpen,
+      timelineOpen,
     ],
   );
 
