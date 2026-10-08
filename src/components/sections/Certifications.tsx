@@ -3,6 +3,7 @@
 import { ArrowUpRight, MagnifyingGlass, Plus, SealCheck, Star, X } from "@phosphor-icons/react";
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "motion/react";
+import Image, { type StaticImageData } from "next/image";
 import { certCategories, certifications } from "@/data/certifications";
 import { profile } from "@/data/profile";
 import { skillById } from "@/data/skills";
@@ -12,6 +13,9 @@ import { matches } from "@/lib/evidence";
 import { easeDrawer, easeOutExpo, springSnappy } from "@/lib/motion";
 import { useStore } from "@/lib/store";
 import { Bezel, Counter, Reveal, SectionHeading } from "@/components/ui/primitives";
+import greenBelt from "@/assets/certs/green-belt.jpg";
+import leanSixSigmaSeal from "@/assets/certs/lean-six-sigma-seal.png";
+import yellowBelt from "@/assets/certs/yellow-belt.jpg";
 
 const issuers: Issuer[] = ["LinkedIn Learning", "Genpact", "Udemy"];
 const issuerMark: Record<Issuer, string> = { "LinkedIn Learning": "in", Genpact: "G", Udemy: "U" };
@@ -156,8 +160,16 @@ function CertCard({ cert }: { cert: Certification }) {
   );
 }
 
+/** Artwork for the featured credentials: a framed photo or emblem plus a seal. */
+const featuredArt: Record<string, { image?: StaticImageData; seal?: StaticImageData; monogram?: string }> = {
+  "six-sigma-green-belt": { image: greenBelt, seal: leanSixSigmaSeal },
+  "lean-six-sigma-yellow-belt": { image: yellowBelt, seal: leanSixSigmaSeal },
+  "lean-digital-ambassador": { monogram: "LDA" },
+};
+
 function FeaturedCredential({ cert, delay }: { cert: Certification; delay: number }) {
   const { l, t, focusCert } = useStore();
+  const art = featuredArt[cert.id] ?? {};
   return (
     <Reveal delay={delay}>
       <button
@@ -165,26 +177,54 @@ function FeaturedCredential({ cert, delay }: { cert: Certification; delay: numbe
         onClick={() => focusCert(cert.id)}
         className="group block h-full w-full text-left transition-transform duration-700 ease-drawer hover:-translate-y-1"
       >
-        <Bezel className="h-full" innerClassName="flex h-full flex-col p-6">
-          <div className="flex items-start justify-between">
-            <span className="flex size-12 items-center justify-center rounded-full bg-hunter text-bone">
-              <SealCheck size={24} weight="light" />
+        <Bezel className="h-full" innerClassName="flex h-full flex-col p-2">
+          <div className="relative h-44 overflow-hidden rounded-[1.2rem] ring-1 ring-ink/[0.06] sm:h-48">
+            {art.image ? (
+              <Image
+                src={art.image}
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 33vw, 100vw"
+                placeholder="blur"
+                className="object-cover transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.06]"
+              />
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center bg-brunswick bg-[radial-gradient(70%_70%_at_50%_30%,rgba(88,129,87,0.55),transparent_70%)]">
+                <span className="font-display text-[4.75rem] leading-none tracking-[-0.02em] text-brass-light italic transition-transform duration-[1.2s] ease-expo group-hover:scale-[1.06]">
+                  {art.monogram}
+                </span>
+                <span className="mt-3 font-mono text-[10.5px] tracking-[0.32em] text-bone/65 uppercase">{cert.issuer}</span>
+              </div>
+            )}
+            <span className="absolute top-3 right-3 rounded-full bg-paper/90 px-2.5 py-1 font-mono text-[11px] text-ink shadow-sm">
+              {formatYM(cert.issued, t)}
             </span>
-            <span className="font-mono text-[11px] text-muted">{formatYM(cert.issued, t)}</span>
           </div>
-          <p className="mt-6 font-display text-[1.75rem] leading-[1.05] tracking-[-0.015em] text-ink sm:mt-auto sm:pt-10">
-            {l(cert.name)}
-          </p>
-          <p className="mt-2 text-[13px] text-muted">{cert.issuer}</p>
-          <p className="mt-5 border-t border-ink/[0.07] pt-4 text-[12.5px] leading-relaxed text-muted">
-            <span className="font-mono text-[10.5px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</span>
-            <br />
-            {cert.skills
-              .map((id) => skillById.get(id))
-              .filter((s) => s !== undefined)
-              .map((s) => l(s.name))
-              .join(" · ")}
-          </p>
+
+          <div className="relative flex flex-1 flex-col px-4 pb-4">
+            {/* Seal, mounted across the edge of the artwork */}
+            <span className="absolute -top-8 left-4 size-16 rounded-full bg-surface p-1 shadow-[0_12px_26px_-12px_rgba(28,42,34,0.55)] ring-1 ring-ink/[0.07]">
+              {art.seal ? (
+                <Image src={art.seal} alt="Lean Six Sigma" sizes="64px" className="size-full rounded-full" />
+              ) : (
+                <span className="flex size-full items-center justify-center rounded-full bg-hunter text-bone">
+                  <SealCheck size={26} weight="light" />
+                </span>
+              )}
+            </span>
+
+            <p className="pt-12 font-display text-[1.6rem] leading-[1.05] tracking-[-0.015em] text-ink">{l(cert.name)}</p>
+            <p className="mt-1.5 text-[13px] text-muted">{cert.issuer}</p>
+            <p className="mt-auto border-t border-ink/[0.07] pt-4 text-[12.5px] leading-relaxed text-muted">
+              <span className="font-mono text-[10.5px] tracking-[0.16em] text-hunter uppercase">{t.certs.validates}</span>
+              <br />
+              {cert.skills
+                .map((id) => skillById.get(id))
+                .filter((s) => s !== undefined)
+                .map((s) => l(s.name))
+                .join(" · ")}
+            </p>
+          </div>
         </Bezel>
       </button>
     </Reveal>
