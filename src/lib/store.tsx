@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { flushSync } from "react-dom";
 import { roleById, roles } from "@/data/roles";
 import { skillById } from "@/data/skills";
 import type { CertCategoryId, ChapterId, Issuer, Lang, Localized, SkillCategoryId } from "@/data/types";
@@ -21,7 +22,6 @@ type Store = {
   /** Picks the current-language side of a localized string. */
   l: (value: Localized) => string;
   switchLang: (next?: Lang) => void;
-  switching: boolean;
 
   openRoles: ReadonlySet<string>;
   toggleRole: (id: string) => void;
@@ -75,7 +75,6 @@ function scrollIntoViewSoon(elementId: string, block: ScrollLogicalPosition = "s
 
 export function StoreProvider({ initialLang, children }: { initialLang: Lang; children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(initialLang);
-  const [switching, setSwitching] = useState(false);
   const [openRoles, setOpenRoles] = useState<Set<string>>(() => new Set([roles[0].id]));
   const [chapter, setChapter] = useState<ChapterId | "all">("all");
   const [skillCategory, setSkillCategory] = useState<SkillCategoryId | "all">("all");
@@ -96,15 +95,29 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
     (next?: Lang) => {
       const target: Lang = next ?? (lang === "es" ? "en" : "es");
       if (target === lang) return;
-      setSwitching(true);
-      window.setTimeout(() => {
+
+      const apply = () => {
         setLang(target);
         document.documentElement.lang = target;
         document.title = TITLES[target];
         const path = target === "en" ? "/en" : "/";
         window.history.replaceState(window.history.state, "", path + window.location.hash);
-        setSwitching(false);
-      }, 180);
+      };
+
+      // The browser snapshots the current page and dissolves the new language in
+      // over it (styles in globals.css). Without support, the swap is instant.
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!document.startViewTransition || reduce) {
+        apply();
+        return;
+      }
+      const transition = document.startViewTransition(() => flushSync(apply));
+      // If the browser can't capture a frame (e.g. a backgrounded tab), switch
+      // without the animation rather than leaving the page waiting.
+      const guard = window.setTimeout(() => transition.skipTransition(), 400);
+      const clear = () => window.clearTimeout(guard);
+      transition.updateCallbackDone.then(clear, clear);
+      transition.ready.catch(() => {});
     },
     [lang],
   );
@@ -195,7 +208,6 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
       t,
       l,
       switchLang,
-      switching,
       openRoles,
       toggleRole,
       setAllRoles,
@@ -228,7 +240,6 @@ export function StoreProvider({ initialLang, children }: { initialLang: Lang; ch
       t,
       l,
       switchLang,
-      switching,
       openRoles,
       toggleRole,
       setAllRoles,

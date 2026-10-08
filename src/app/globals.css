@@ -192,3 +192,25 @@
     animation: enter-draw 2.4s var(--ease-expo) both;
   }
 }
+
+/*
+ * Language switch: the old page stays fully opaque underneath while the new
+ * language resolves on top from a soft blur, so the page background never shows
+ * through mid-transition.
+ */
+@keyframes lang-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: lang-in 0.6s var(--ease-expo) both;
+  mix-blend-mode: normal;
+}
